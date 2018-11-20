@@ -107,7 +107,15 @@ namespace AlexaDontDie
 
         private string ProcessYesIntent(Dictionary<string, object> attributes)
         {
-            attributes["Question"] = Convert.ToInt32(attributes["Question"]) + 1;
+            var questionNumber = Convert.ToInt32(attributes["Question"]);
+            switch (questionNumber)
+            {
+                case 1:
+                    break;
+                default:
+                    break;
+            }
+            attributes["Question"] = questionNumber + 1;
             response.SessionAttributes = attributes;
             return $"Go to the question after question {attributes["Question"]}, yes or no?";
         }
