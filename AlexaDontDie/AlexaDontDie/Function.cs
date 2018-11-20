@@ -108,16 +108,24 @@ namespace AlexaDontDie
         private string ProcessYesIntent(Dictionary<string, object> attributes)
         {
             var questionNumber = Convert.ToInt32(attributes["Question"]);
+            string nextQuestion = "";
             switch (questionNumber)
             {
                 case 1:
+                    nextQuestion = $"{resource.Introduction} {resource.Questions[questionNumber-1]}";
                     break;
+                case 2:
+                    attributes["Inventory"] = true;
+                    nextQuestion = $"{resource.Statements["inventory"]} {resource.Questions[questionNumber - 1]}";
+                    break;
+                case 3:
+                    nextQuestion = $"{resource.Statement[]} {resource.Questions[]}";
                 default:
                     break;
             }
             attributes["Question"] = questionNumber + 1;
             response.SessionAttributes = attributes;
-            return $"Go to the question after question {attributes["Question"]}, yes or no?";
+            return nextQuestion;
         }
 
         private string ProcessNoIntent(Dictionary<string, object> attributes)
