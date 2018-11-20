@@ -8,8 +8,42 @@ namespace AlexaDontDie
     {
         /*  var iventory = bool
             var energy = int
+            energy = 7
             var hasWater = bool
             var hasFire = bool
+            var hasShelter = bool
+
+            DAY 1 
+
+            STORYTIME - setup
+
+            Choice 1 Do you stop and take inventory or keep walking? 
+            if stop, i = true
+                tell player - have LIGHTER, 1/2 BAG of TRAIL MIX, TARP
+            if walk, e -= 1 
+
+            Choice 2 Do you find water or find food?
+            if water, e += 1, water = true
+            if food water = false, go to FOODCHOICE
+
+            FOODCHOICE Do you try to catch an animal or eat the bugs you see?
+            if bugs, e+= 1
+            if animal, e -= 2
+                if e >= 5, animal catch SUCCESS, e += 4
+                if e < 5, animal catch FAIL
+
+            Decision 3 Do you take time to build shelter or sleep under tree?
+            if shelter, hasShelter = TRUE
+            if tree, hasShelter = FALSE
+
+            WILDCARD A storm happens!
+
+            if water = false && i = true, use tarp to get water
+                water = true, e -= 1
+            if hasShelter = false
+                e -= 3
+
+
 
             DAY 2
 
