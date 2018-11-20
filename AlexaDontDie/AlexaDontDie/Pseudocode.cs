@@ -7,8 +7,7 @@ namespace AlexaDontDie
     class Pseudocode
     {
         /*  var iventory = bool
-            var energy = int
-            energy = 7
+            int energy = 7
             var hasWater = bool
             var hasFire = bool
             var hasShelter = bool
@@ -17,87 +16,105 @@ namespace AlexaDontDie
 
             STORYTIME - setup
 
-            Choice 1 Do you want to stop and check what you have with you?
+            QUESTION 1 Do you want to stop and check what you have with you?
             
-            if stop, i = true
+            if YES, i = True
                 tell player - have LIGHTER, 1/2 BAG of TRAIL MIX, TARP
-            if walk, e -= 1 
+            if NO, i stays False
 
-            Choice 2 Are you hungry enough to ignore your thirst?
-            if water, water = true go to WATERCHOICE
-            if food, water = false, go to FOODCHOICE
+            QUESTION 2 Are you hungry enough to ignore your thirst?
+            if YES, go to FOODCHOICE
+            if NO, go to WATERCHOICE
+
+            FOODCHOICE You see some animals nearby, do you try to hunt them?
+            if NO, you eat bugs e += 1
+            if YES, e -= 2
+                if e >= 5, animal catch SUCCESS, e += 4
+                if e < 5, animal catch FAIL
+            next question
 
             WATERCHOICE
             You see a stream nearby, do you take a drink?
-            
-            yes - water = true,
-            energy -= 1;
-            
-            no - nothing
+            if YES - water = true, energy -= 1;
+            if NO - no change
+            next question
 
-            FOODCHOICE You see some animals nearby, do you try to hunt them?
-            if no, you eat bugs e += 1
-            if yes, e -= 2
-                if e >= 5, animal catch SUCCESS, e += 4
-                if e < 5, animal catch FAIL
-
-            Decision 3 Do you want to build a shelter?
-            if shelter, hasShelter = TRUE
-            if tree, hasShelter = FALSE
+            QUESTION 3 Do you want to build a shelter?
+            if YES, hasShelter = TRUE
+            if NO, hasShelter = FALSE sleep under tree
 
             WILDCARD A storm happens!
-
-            do you try and gather water from the storm?
-
-            if water = false && i = true, use tarp to get water
-                water = true, e -= 1
-            if hasShelter = false
+            QUESTION 4
+            if water = false && i = true, Do you want to use tarp to get water?
+                if YES, hasWater = true, e-=1
+                if NO, hasWater = false
+            if hasWater = false & hasShelter = false
                 e -= 3
-
+                you cry as the rain hits your face, you desperately try to drink some rain drops
+            if hasWater = true, hasShelter = true & inventory = true
+                you watch the rain safely from your shelter in comfort
 
 
             DAY 2
 
+            QUESTION 5
+            if(hasShelter == true & hasWater == true){
+                "you awake next morning feeling refreshed"
+                enery +
+            else if (hasShelter == false & hasWater == false){
+                "you are thirsty. do you look for water"? 
+                if YES, energy--, hasWater = true, 
+                if NO, hasWater = false 
+            } else 
+                "you awake feeling refreshed yet thirsty, do you look for water?"
+                if YES, energy+, hasWater = true, 
+                if NO, energy +, hasWater = false 
+
+            QUESTION 6
+            "you're hungry. do you look for food"?
+            if YES = energy++ 
+            if NO = energy--
+
+            QUESTION 7
             if(i == true){
-            question1 = "you awake next morning feeling refreshed"
-            else{
-            question1 = "you are thirsty. do you look for water"? => y = energy-- hasWater = true, n = hasWater = false 
-            }
-
-            question2 = "you're hungry. do you look for food"? => y = energy++ n = energy--
-
-            if(i == true){
-            question3 = "you have a lighter. do you make a fire?" => y has fire = true = energy++, n = energy-- hasFire = false
+            "you have a lighter. do you make a fire?"
+            if YES hasfire = true, energy++
+            if NO energy--, hasFire = false
             }
             else{
-            question3 = "do you make a fire?" => y = energy-- hasFire = true, n = energy---- hasFire = false,
+            "you feel cold.  do you make a fire?"  
+            if YES energy--, hasFire = true
+            if NO energy----, hasFire = false,
             }
 
-            question4 = "you hear shuffling and grunts outside, do you investigate?" 
-            y=(
-            if(energy < 4)
-            game over
-            else{
-            its a bear and you run away or something
-            energy --)
-            n = nothing happens
+            QUESTION 8 
+            "you hear shuffling and grunts outside, do you investigate?" 
+            if YES 
+                if(energy < 4)
+                game over
+                else{
+                its a bear and you run away or something
+                energy --)
+            if NO nothing happens
 
             
             DAY 3
+            QUESTION 9
             "you awake the next morning wondering if you're ever going to see civilization again."
-            if(energy < 3 or hasWater = false and not hasFire)
+            if(energy < 3 or hasWater = false & hasFire=false)
             {
             dead
             }
             else{
-            hears helicopters
-            question: do you run into the clearing to signal for help?
-            if(energy < 4 or not has fire)
-            dead
-            {
-            else{ energy > 4 or hasFire)
-            rescued
-            }
+            "you hear a helicopter approaching, do you run into the clearing to signal for help?"
+            if YES if(energy < 4 or not has fire)
+                dead
+                {
+                else{ energy > 4 or hasFire)
+                rescued
+                }
+            if NO
+                dead
         */
     }
 }
