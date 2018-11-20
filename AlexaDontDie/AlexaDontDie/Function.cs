@@ -39,10 +39,11 @@ namespace AlexaDontDie
                 if (input.GetRequestType() == typeof(LaunchRequest))
                 {
                     ProcessLaunchRequest(response.Response);
+                    response.SessionAttributes = resource.Stats;
                 }
                 else if (input.GetRequestType() == typeof(IntentRequest))
                 {
-                    ProcessIntentRequest(input);
+                    response.Response.OutputSpeech = ProcessIntentRequest(input);
                 }
                 Log(JsonConvert.SerializeObject(response));
                 return response;
@@ -106,23 +107,15 @@ namespace AlexaDontDie
 
         private string ProcessYesIntent(Dictionary<string, object> attributes)
         {
-            if (attributes.Count == 0)
-            {
-                attributes.Add("Question", 2);
-                response.SessionAttributes = attributes;
-                return "Excellent!";
-            }
-            return null;
+            attributes["Question"] = Convert.ToInt32(attributes["Question"]) + 1;
+            response.SessionAttributes = attributes;
+            return $"Go to the question after question {attributes["Question"]}, yes or no?";
         }
 
         private string ProcessNoIntent(Dictionary<string, object> attributes)
         {
-            if (attributes.Count == 0)
-            {
-                response.Response.ShouldEndSession = true;
-                return "Boo!";
-            }
-            return null;
+            response.Response.ShouldEndSession = true;
+            return $"You got to question {attributes["Question"]}";
         }
 
         private string SsmlDecorate(string speech)

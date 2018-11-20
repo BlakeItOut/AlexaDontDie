@@ -14,5 +14,14 @@ namespace AlexaDontDie
         public string HelpMessage { get; set; } = "Just say yes or no. Say help to hear the prompt again. You can say exit at any time to exit.";
         public string HelpReprompt { get; set; } = "Yes, no, help, or exit.";
         public string StopMessage { get; set; } = "Safe adventures!";
+        public Dictionary<string, object> Stats { get; set; } = new Dictionary<string, object>()
+        {
+            { "Question", 1},
+            { "Inventory", false},
+            { "HasWater", false },
+            { "HasFire", false },
+            { "HasShelter", false },
+            { "Energy", 7 }
+        };
     }
 }
