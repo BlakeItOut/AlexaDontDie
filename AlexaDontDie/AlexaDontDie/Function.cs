@@ -112,18 +112,60 @@ namespace AlexaDontDie
             switch (questionNumber)
             {
                 case 1:
-                    nextQuestion = $"{resource.Introduction} {resource.Questions[questionNumber-1]}";
+                    nextQuestion = $"{resource.Introduction} {resource.Questions[2]}"; //"Do you want to stop and check what you have with you?"
+                    attributes["Question"] = 2;
                     break;
                 case 2:
                     attributes["Inventory"] = true;
-                    nextQuestion = $"{resource.Statements["inventory"]} {resource.Questions[questionNumber - 1]}";
+                    nextQuestion = $"{resource.Statements["inventory"]} {resource.Questions[3]}"; //"Are you hungry enough to ignore your thirst?"
+                    attributes["Question"] = 3;
                     break;
                 case 3:
-                    nextQuestion = $"{resource.Statement[]} {resource.Questions[]}";
+                    nextQuestion = $"{resource.Questions[4]}"; //"You see some animals nearby, do you try to hunt them?"
+                    attributes["Question"] = 4;
+                    break;
+                case 4:
+                    attributes["Energy"] = Convert.ToInt32(attributes["Energy"]) - 2;
+                    if(Convert.ToInt32(attributes["Energy"])>=5)
+                    {
+                        nextQuestion = "Animal catch success.";
+                        attributes["Energy"] = Convert.ToInt32(attributes["Energy"]) + 4;
+                    }
+                    else
+                    {
+                        nextQuestion = "Animal catch fail.";
+                    }
+                    nextQuestion = $"{nextQuestion} {resource.Questions[6]}"; //"Do you want to build a shelter?"
+                    attributes["Question"] = 6;
+                    break;
+                case 5:
+                    attributes["HasWater"] = true;
+                    attributes["Energy"] = Convert.ToInt32(attributes["Energy"]) - 1;
+                    nextQuestion = $"{resource.Questions[6]}";
+                    attributes["Question"] = 6;
+                    break;
+                case 6:
+                    attributes["HasShelter"] = true;
+                    if (Convert.ToBoolean(attributes["HasWater"]) && Convert.ToBoolean(attributes["HasShelter"]) && Convert.ToBoolean(attributes["Inventory"]))
+                    {
+                        attributes["Energy"] = Convert.ToInt32(attributes["Energy"]) + 1;
+                        nextQuestion = $"{resource.Statements["yesWaterShelterAndInventory"]} {resource.Statements["yesWaterShelter"]} {resource.Questions[9]}";
+                        attributes["Question"] = 9; //"you're hungry. do you look for food?"
+                    }
+                    else if (!Convert.ToBoolean(attributes["HasWater"]) && Convert.ToBoolean(attributes["Inventory"]))
+                    {
+                        nextQuestion = $"{resource.Questions[7]}";
+                        attributes["Question"] = 7; //"STORM.  Do you want to use tarp to get water?"
+                    }
+                    
+                    
+                    break;
+                case 7:
+
                 default:
                     break;
             }
-            attributes["Question"] = questionNumber + 1;
+            
             response.SessionAttributes = attributes;
             return nextQuestion;
         }

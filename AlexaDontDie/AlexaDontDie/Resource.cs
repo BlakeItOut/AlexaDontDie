@@ -16,7 +16,7 @@ namespace AlexaDontDie
         public string StopMessage { get; set; } = "Safe adventures!";
         public Dictionary<string, object> Stats { get; set; } = new Dictionary<string, object>()
         {
-            { "Question", 1},
+            { "Question", 1}, //start after intro
             { "Inventory", false},
             { "HasWater", false },
             { "HasFire", false },
