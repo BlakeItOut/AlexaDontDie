@@ -17,26 +17,37 @@ namespace AlexaDontDie
 
             STORYTIME - setup
 
-            Choice 1 Do you stop and take inventory or keep walking? 
+            Choice 1 Do you want to stop and check what you have with you?
+            
             if stop, i = true
                 tell player - have LIGHTER, 1/2 BAG of TRAIL MIX, TARP
             if walk, e -= 1 
 
-            Choice 2 Do you find water or find food?
-            if water, e += 1, water = true
-            if food water = false, go to FOODCHOICE
+            Choice 2 Are you hungry enough to ignore your thirst?
+            if water, water = true go to WATERCHOICE
+            if food, water = false, go to FOODCHOICE
 
-            FOODCHOICE Do you try to catch an animal or eat the bugs you see?
-            if bugs, e+= 1
-            if animal, e -= 2
+            WATERCHOICE
+            You see a stream nearby, do you take a drink?
+            
+            yes - water = true,
+            energy -= 1;
+            
+            no - nothing
+
+            FOODCHOICE You see some animals nearby, do you try to hunt them?
+            if no, you eat bugs e += 1
+            if yes, e -= 2
                 if e >= 5, animal catch SUCCESS, e += 4
                 if e < 5, animal catch FAIL
 
-            Decision 3 Do you take time to build shelter or sleep under tree?
+            Decision 3 Do you want to build a shelter?
             if shelter, hasShelter = TRUE
             if tree, hasShelter = FALSE
 
             WILDCARD A storm happens!
+
+            do you try and gather water from the storm?
 
             if water = false && i = true, use tarp to get water
                 water = true, e -= 1
@@ -48,7 +59,7 @@ namespace AlexaDontDie
             DAY 2
 
             if(i == true){
-            question1 = "the tarp you set up last night collected water" do you ____? => y = ___, n = ____
+            question1 = "you awake next morning feeling refreshed"
             else{
             question1 = "you are thirsty. do you look for water"? => y = energy-- hasWater = true, n = hasWater = false 
             }
@@ -73,13 +84,15 @@ namespace AlexaDontDie
 
             
             DAY 3
+            "you awake the next morning wondering if you're ever going to see civilization again."
             if(energy < 3 or hasWater = false and not hasFire)
             {
             dead
             }
             else{
             hears helicopters
-            if(energy < 4 )
+            question: do you run into the clearing to signal for help?
+            if(energy < 4 or not has fire)
             dead
             {
             else{ energy > 4 or hasFire)
