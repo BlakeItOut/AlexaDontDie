@@ -49,7 +49,7 @@ namespace AlexaDontDie
         private void ProcessLaunchRequest(ResponseBody response)
         {
             IOutputSpeech innerResponse = new SsmlOutputSpeech();
-            (innerResponse as SsmlOutputSpeech).Ssml = "<speak>Welcome to Don't Die. Try not to die.</speak>";
+            (innerResponse as SsmlOutputSpeech).Ssml = "<speak>Welcome to Don't Die. Try not to die.<audio src='soundbank://soundlibrary/animals/amzn_sfx_bear_roar_grumble_01'/></speak>";
             response.OutputSpeech = innerResponse;
             IOutputSpeech prompt = new PlainTextOutputSpeech();
             (prompt as PlainTextOutputSpeech).Text = "Say yes or no";
