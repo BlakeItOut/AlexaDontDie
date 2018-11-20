@@ -23,5 +23,13 @@ namespace AlexaDontDie
             { "HasShelter", false },
             { "Energy", 7 }
         };
+
+        public string Introduction { get; set; } = "ENTER INTRO TEXT HERE";
+
+        public string[] Questions { get; set; } = 
+        {
+            "",
+            "",
+        };
     }
 }
