@@ -172,8 +172,54 @@ namespace AlexaDontDie
 
         private string ProcessNoIntent(Dictionary<string, object> attributes)
         {
-            response.Response.ShouldEndSession = true;
-            return $"You got to question {attributes["Question"]}";
+            var questionNumber = Convert.ToInt32(attributes["Question"]);
+            string nextQuestion = "";
+            switch (questionNumber)
+            {
+                case 1:
+                    nextQuestion = $"{resource.Introduction} {resource.Questions["q1"]}";
+                    break;
+                case 2:
+                    attributes["Inventory"] = false;
+                    nextQuestion = $"{resource.Questions["q2"]}";
+                    break;
+                case 3:
+                    nextQuestion = $"{ resource.Questions["waterchoice"]}";
+                    attributes["Question"] = questionNumber + 1;
+                    break;
+                case 4:
+                    nextQuestion = $"{ resource.Questions["q4"]}";
+                    break;
+                case 5:
+                    nextQuestion = $"{ resource.Questions["q4"]}";
+                    break;
+                case 6:
+                    attributes["HasShelter"] = false;
+                    nextQuestion = $"{ resource.Questions["q5"]}";
+                    break;
+                case 7:
+                    nextQuestion = $"{ resource.Questions["notarp"]}";
+                    break;
+                case 8:
+                    nextQuestion = $"{ resource.Questions["q6"]}";
+                    break;
+                case 9:
+                    if{
+                        resource.
+                    }
+                    break;
+                case 10:
+                    break;
+                case 11:
+                    break;
+                case 12:
+                    break;
+                default:
+                    break;
+            }
+            attributes["Question"] = questionNumber + 1;
+            response.SessionAttributes = attributes;
+            return nextQuestion;
         }
 
         private string SsmlDecorate(string speech)
