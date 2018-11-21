@@ -58,7 +58,7 @@ namespace AlexaDontDie
         private void ProcessLaunchRequest(ResponseBody response)
         {
             IOutputSpeech innerResponse = new SsmlOutputSpeech();
-            (innerResponse as SsmlOutputSpeech).Ssml = SsmlDecorate(resource.LaunchMessage);
+            (innerResponse as SsmlOutputSpeech).Ssml = SsmlDecorate(resource.LaunchMessage + resource.Questions[1]);
             response.OutputSpeech = innerResponse;
             IOutputSpeech prompt = new PlainTextOutputSpeech();
             (prompt as PlainTextOutputSpeech).Text = resource.LaunchMessageReprompt;
@@ -142,14 +142,14 @@ namespace AlexaDontDie
                     attributes["HasWater"] = true;
                     attributes["Energy"] = Convert.ToInt32(attributes["Energy"]) - 1;
                     nextQuestion = $"{resource.Questions[6]}";
-                    attributes["Question"] = 6;
+                    attributes["Question"] = 6; //"Do you want to build a shelter?"
                     break;
                 case 6:
                     attributes["HasShelter"] = true;
                     if (Convert.ToBoolean(attributes["HasWater"]) && Convert.ToBoolean(attributes["HasShelter"]) && Convert.ToBoolean(attributes["Inventory"]))
                     {
                         attributes["Energy"] = Convert.ToInt32(attributes["Energy"]) + 1;
-                        nextQuestion = $"{resource.Statements["yesWaterShelterAndInventory"]} {resource.Statements["yesWaterShelter"]} {resource.Questions[9]}";
+                        nextQuestion = $"STORM. {resource.Statements["yesWaterShelterAndInventory"]} {resource.Statements["yesWaterShelter"]} {resource.Questions[9]}";
                         attributes["Question"] = 9; //"you're hungry. do you look for food?"
                     }
                     else if (!Convert.ToBoolean(attributes["HasWater"]) && Convert.ToBoolean(attributes["Inventory"]))
@@ -157,11 +157,18 @@ namespace AlexaDontDie
                         nextQuestion = $"{resource.Questions[7]}";
                         attributes["Question"] = 7; //"STORM.  Do you want to use tarp to get water?"
                     }
-                    
+                    else
+                    {
+
+                    }
                     
                     break;
                 case 7:
-
+                    attributes["HasWater"] = true;
+                    attributes["Energy"] = Convert.ToInt32(attributes["Energy"]) - 1;
+                    nextQuestion = $"STORM. {resource.Statements["yesWaterShelterAndInventory"]} {resource.Statements["yesWaterShelter"]} {resource.Questions[9]}";
+                    attributes["Question"] = 9;
+                    break;
                 default:
                     break;
             }
@@ -172,54 +179,55 @@ namespace AlexaDontDie
 
         private string ProcessNoIntent(Dictionary<string, object> attributes)
         {
-            var questionNumber = Convert.ToInt32(attributes["Question"]);
-            string nextQuestion = "";
-            switch (questionNumber)
-            {
-                case 1:
-                    nextQuestion = $"{resource.Introduction} {resource.Questions["q1"]}";
-                    break;
-                case 2:
-                    attributes["Inventory"] = false;
-                    nextQuestion = $"{resource.Questions["q2"]}";
-                    break;
-                case 3:
-                    nextQuestion = $"{ resource.Questions["waterchoice"]}";
-                    attributes["Question"] = questionNumber + 1;
-                    break;
-                case 4:
-                    nextQuestion = $"{ resource.Questions["q4"]}";
-                    break;
-                case 5:
-                    nextQuestion = $"{ resource.Questions["q4"]}";
-                    break;
-                case 6:
-                    attributes["HasShelter"] = false;
-                    nextQuestion = $"{ resource.Questions["q5"]}";
-                    break;
-                case 7:
-                    nextQuestion = $"{ resource.Questions["notarp"]}";
-                    break;
-                case 8:
-                    nextQuestion = $"{ resource.Questions["q6"]}";
-                    break;
-                case 9:
-                    if{
-                        resource.
-                    }
-                    break;
-                case 10:
-                    break;
-                case 11:
-                    break;
-                case 12:
-                    break;
-                default:
-                    break;
-            }
-            attributes["Question"] = questionNumber + 1;
-            response.SessionAttributes = attributes;
-            return nextQuestion;
+            //var questionNumber = Convert.ToInt32(attributes["Question"]);
+            //string nextQuestion = "";
+            //switch (questionNumber)
+            //{
+            //    case 1:
+            //        nextQuestion = $"{resource.Introduction} {resource.Questions["q1"]}";
+            //        break;
+            //    case 2:
+            //        attributes["Inventory"] = false;
+            //        nextQuestion = $"{resource.Questions["q2"]}";
+            //        break;
+            //    case 3:
+            //        nextQuestion = $"{ resource.Questions["waterchoice"]}";
+            //        attributes["Question"] = questionNumber + 1;
+            //        break;
+            //    case 4:
+            //        nextQuestion = $"{ resource.Questions["q4"]}";
+            //        break;
+            //    case 5:
+            //        nextQuestion = $"{ resource.Questions["q4"]}";
+            //        break;
+            //    case 6:
+            //        attributes["HasShelter"] = false;
+            //        nextQuestion = $"{ resource.Questions["q5"]}";
+            //        break;
+            //    case 7:
+            //        nextQuestion = $"{ resource.Questions["notarp"]}";
+            //        break;
+            //    case 8:
+            //        nextQuestion = $"{ resource.Questions["q6"]}";
+            //        break;
+            //    case 9:
+            //        if{
+            //            resource.
+            //        }
+            //        break;
+            //    case 10:
+            //        break;
+            //    case 11:
+            //        break;
+            //    case 12:
+            //        break;
+            //    default:
+            //        break;
+            //}
+            //attributes["Question"] = questionNumber + 1;
+            //response.SessionAttributes = attributes;
+            //return nextQuestion;
+            return null;
         }
 
         private string SsmlDecorate(string speech)

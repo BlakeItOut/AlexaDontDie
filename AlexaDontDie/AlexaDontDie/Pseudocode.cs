@@ -16,30 +16,35 @@ namespace AlexaDontDie
 
             STORYTIME - setup
 
-            QUESTION 1 Do you want to stop and check what you have with you?
-            
+            QUESTION 1 Would you like to try your luck?
+            if YES,
+            Go to QUESTION 2
+            if NO,
+            End session
+
+            QUESTION 2 Do you want to stop and check what you have with you?            
             if YES, i = True
-                tell player - have LIGHTER, 1/2 BAG of TRAIL MIX, TARP
-            if NO, i stays False
+                tell player [inventory] - have LIGHTER, 1/2 BAG of TRAIL MIX, TARP
+            if NO
+            Both go to QUESTION 3
 
-            QUESTION 2 Are you hungry enough to ignore your thirst?
-            if YES, go to FOODCHOICE
-            if NO, go to WATERCHOICE
+            QUESTION 3 Are you hungry enough to ignore your thirst?
+            if YES, go to FOODCHOICE QUESTION 4
+            if NO, go to WATERCHOICE QUESTION 5
 
-            FOODCHOICE You see some animals nearby, do you try to hunt them?
+            FOODCHOICE QUESTION 4 You see some animals nearby, do you try to hunt them?
             if NO, you eat bugs e += 1
             if YES, e -= 2
                 if e >= 5, animal catch SUCCESS, e += 4
                 if e < 5, animal catch FAIL
             next question
 
-            WATERCHOICE
-            You see a stream nearby, do you take a drink?
+            WATERCHOICE QUESTION 5 You see a stream nearby, do you take a drink?
             if YES - water = true, energy -= 1;
             if NO - no change
             next question
 
-            QUESTION 3 Do you want to build a shelter?
+            QUESTION 6 Do you want to build a shelter?
             if YES, hasShelter = TRUE
             if NO, hasShelter = FALSE sleep under tree
 
