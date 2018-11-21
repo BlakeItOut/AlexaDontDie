@@ -37,89 +37,126 @@ namespace AlexaDontDie
             if YES, e -= 2
                 if e >= 5, animal catch SUCCESS, e += 4
                 if e < 5, animal catch FAIL
-            next question
+            Both go to QUESTION 6
 
             WATERCHOICE QUESTION 5 You see a stream nearby, do you take a drink?
             if YES - water = true, energy -= 1;
             if NO - no change
-            next question
+            Both go to QUESTION 6
 
             QUESTION 6 Do you want to build a shelter?
             if YES, hasShelter = TRUE
             if NO, hasShelter = FALSE sleep under tree
-
-            WILDCARD A storm happens!
-            QUESTION 4
-            if water = false && i = true, Do you want to use tarp to get water?
-                if YES, hasWater = true, e-=1
-                if NO, hasWater = false
-            if hasWater = false & hasShelter = false
-                e -= 3
-                you cry as the rain hits your face, you desperately try to drink some rain drops
-            if hasWater = true, hasShelter = true & inventory = true
-                you watch the rain safely from your shelter in comfort
-
-
+            Both go to:
+                WILDCARD A storm happens!
+                if hasWater == true 
+                    if hasShelter == true
+                        if i == true
+                            you watch the rain safely from your shelter in comfort
+                            "you awake next morning feeling refreshed"
+                            Go to QUESTION 10
+                        else
+                            "you awake next morning feeling refreshed"
+                            Go to QUESTION 10
+                    else
+                        if i == true
+                            "you sleep under a tree"
+                            Go to QUESTION 10
+                        else
+                            "you sleep under a tree"
+                            Go to QUESTION 10
+                else
+                    if hasShelter == true
+                        if i == true
+                            Go to QUESTION 7
+                        else
+                            e -= 3
+                            []you cry as the rain hits your face, you desperately try to drink some rain drops
+                            Go to QUESTION 9
+                            
+                    else
+                        if i == true
+                            Go to QUESTION 7
+                        else
+                            e -= 3
+                            []you cry as the rain hits your face, you desperately try to drink some rain drops
+                            Go to QUESTION 8
+                
+            QUESTION 7
+            Do you want to use tarp to get water?
+                    if YES, hasWater = true, e-=1
+                        Go to QUESTION 9
+                    if NO, hasWater = false
+                        if hasShelter == true 
+                            Go to QUESTION 9
+                        else 
+                            Go to QUESTION 8
             DAY 2
 
-            QUESTION 5
-            if(hasShelter == true & hasWater == true){
-                "you awake next morning feeling refreshed"
-                enery +
-            else if (hasShelter == false & hasWater == false){
-                "you are thirsty. do you look for water"? 
+            QUESTION 8
+            "you are thirsty. do you look for water"? 
                 if YES, energy--, hasWater = true, 
-                if NO, hasWater = false 
-            } else 
-                "you awake feeling refreshed yet thirsty, do you look for water?"
+                if NO, hasWater = false
+            Both go to QUESTION 10
+
+            QUESTION 9
+            "you awake feeling refreshed yet thirsty, do you look for water?"
                 if YES, energy+, hasWater = true, 
                 if NO, energy +, hasWater = false 
 
-            QUESTION 6
+            QUESTION 10
             "you're hungry. do you look for food"?
             if YES = energy++ 
-            if NO = energy--
-
-            QUESTION 7
-            if(i == true){
-            "you have a lighter. do you make a fire?"
-            if YES hasfire = true, energy++
-            if NO energy--, hasFire = false
-            }
-            else{
-            "you feel cold.  do you make a fire?"  
-            if YES energy--, hasFire = true
-            if NO energy----, hasFire = false,
-            }
-
-            QUESTION 8 
-            "you hear shuffling and grunts outside, do you investigate?" 
-            if YES 
-                if(energy < 4)
-                game over
+            if NO = energy--                       
+                if(i == true){
+                    Go to QUESTION 11
+                }
                 else{
-                its a bear and you run away or something
-                energy --)
-            if NO nothing happens
+                    Go to QUESTION 12
+                }
+            
+            QUESTION 11
+            "you have a lighter. do you make a fire?"
+                if YES hasfire = true, energy++
+                if NO energy--, hasFire = false
+                Both go to QUESTION 13
+
+            QUESTION 12
+            "you feel cold.  do you make a fire?"  
+                if YES energy--, hasFire = true
+                if NO energy----, hasFire = false,
+                Both go to QUESTION 13
+
+            QUESTION 13 
+            "you hear shuffling and grunts outside, do you investigate?" 
+                if YES 
+                    if(energy < 4)
+                    game over
+                    else{
+                    its a bear and you run away or something
+                    energy --)
+                if NO nothing happens
+                Both go to:
+                    "you awake the next morning wondering if you're ever going to see civilization again."
+                    if(energy < 3 or hasWater = false & hasFire=false)
+                        dead
+                    else
+                        Go to QUESTION 14
 
             
+            
             DAY 3
-            QUESTION 9
-            "you awake the next morning wondering if you're ever going to see civilization again."
-            if(energy < 3 or hasWater = false & hasFire=false)
-            {
-            dead
-            }
-            else{
+            
+            
+            QUESTION 14
             "you hear a helicopter approaching, do you run into the clearing to signal for help?"
-            if YES if(energy < 4 or not has fire)
-                dead
-                {
-                else{ energy > 4 or hasFire)
-                rescued
-                }
-            if NO
-                dead
+                if YES 
+                    if energy < 4 or not has fire
+                        dead
+                    else energy > 4 or hasFire
+                        rescued
+                if NO
+                    dead
         */
     }
 }

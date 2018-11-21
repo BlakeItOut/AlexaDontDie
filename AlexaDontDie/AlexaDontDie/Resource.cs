@@ -34,13 +34,13 @@ namespace AlexaDontDie
             { 4,"You see some animals nearby, do you try to hunt them?" }, //FOODCHOICE
             { 5,"You see a stream nearby, do you take a drink?" }, //WATERCHOICE
             { 6,"Do you want to build a shelter?" },
-            { 7,"STORM.  Do you want to use tarp to get water?" }, //CHECK LOGIC HERE -STORM
-            { 8,"You awake feeling refreshed yet thirsty, do you look for water?" },
-            { 9,"You're hungry. Do you look for food?" },
-            { 10,"You have a lighter. Do you make a fire?" },
-            { 11,"You feel cold.  Do you make a fire?" },
-            { 12,"You hear shuffling and grunts outside, do you investigate?" },
-            { 13,"You awake the next morning wondering if you're ever going to see civilization again." },
+            { 7,"Do you want to use tarp to get water?" }, //CHECK LOGIC HERE -STORM
+            { 8,"You are thirsty, do you look for water?" },
+            { 9,"You awake feeling refreshed yet thirsty, do you look for water?" },
+            { 10,"You're hungry. Do you look for food?" },
+            { 11,"You have a lighter. Do you make a fire?" },
+            { 12,"You feel cold.  Do you make a fire?" },
+            { 13,"You hear shuffling and grunts outside, do you investigate?" },
             { 14,"You hear a helicopter approaching, do you run into the clearing to signal for help?" }
         };
 
@@ -50,6 +50,7 @@ namespace AlexaDontDie
             { "noWaterOrShelter", "You cry as the rain hits your face, you desperately try to drink some rain drops" },
             { "yesWaterShelterAndInventory", "You watch the rain safely from your shelter in comfort" },
             { "yesWaterShelter", "You awake next morning feeling refreshed" },
+            { "lastDay","You awake the next morning wondering if you're ever going to see civilization again." }
         };
     }
 }
